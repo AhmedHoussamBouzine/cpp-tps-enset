@@ -3,60 +3,50 @@
 #include <windows.h>
 
 using namespace std;
-
 class Point
 {
 private:
     int x, y;
-    int couleur;
-
 public:
-    Point(int x = 0, int y = 0, int couleur = 3)
+    Point(int _x = 0, int _y = 0)
     {
-        this->x = x;
-        this->y = y;
-        this->couleur = couleur;
+        this->x = _x;
+        this->y = _y;
     }
-
-    void deplacer(int dx, int dy)
-    {
-        effacer();
-        x = dx;
-        y = dy;
-    }
-
     void afficher()
     {
-        static HANDLE h = NULL;
+        static HANDLE handle = NULL;
         COORD coords;
         coords.X = x;
         coords.Y = y;
-        if (!h)
-            h = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleCursorPosition(h, coords);
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), couleur);
+        if (!handle)
+        handle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(handle, coords);
+        SetConsoleTextAttribute(handle, 3);
         cout << "*";
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+        SetConsoleTextAttribute(handle, 7);
     }
-
     void effacer()
     {
         x = 0;
         y = 0;
-        int tmp = couleur;
-        couleur = 0;
-        couleur = tmp;
+    }
+    void deplacer(int dx, int dy)
+    {
+    	effacer();
+        x = dx;
+        y = dy;
     }
 
 };
-    void scene()
-    {
-        Point u(5,6);
-        u.afficher();
-        cout << "\nle point apres deplacement :" << endl;
-        u.deplacer(2, 9);
-        u.afficher();
-    }
+void scene()
+{
+    Point u(0.0);
+    u.afficher();
+    cout << "\nle point apres deplacement :" << endl;
+    u.deplacer(8, 9);
+    u.afficher();
+}
 int main()
 {
    scene();

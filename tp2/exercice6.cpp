@@ -39,7 +39,7 @@ int main()
 
 	cout << "Saisir la raison : ";
 	cin >> raison;
-	cout << "Saisir le nombre des premiers termes que vous voulez calculer : ";
+	cout << "Saisir nbr de termes : ";
 	cin >> nbr_de_termes;
 	SuiteAr suite(nbr_de_termes, raison);
 	suite.afficher();
