@@ -17,6 +17,7 @@ public:
   char *getPointer();
   string &operator=(const string &);
   string operator+(const string &);
+  char &operator[](int);
   void strcpy(const char &);
   void strcat(const char *);
 };
@@ -92,6 +93,10 @@ string string::operator+(const string &_string)
   result->mt[result.mzise] = '\0';
   return result;
 }
+char &string::operator[](inti)
+{
+  return mt[i];
+}
 void string::strcpy(const char &_string)
 {
   msize = 0;
@@ -125,63 +130,3 @@ void string::strcat(const char &_string)
   str = new_str;
   size = new_size;
 }
-
-{
-private:
-  int size;  // length of the string
-  char *str; // pointer to a character array
-
-public:
-  // Default constructor
-  String() : size(0), str(nullptr) {}
-
-  // Constructor with a string parameter
-  String(const char *s) : size(strlen(s)), str(new char[size + 1])
-  {
-    strcpy(str, s);
-  }
-
-  // Copy constructor
-
-  // Destructor
-  ~String()
-  {
-    delete[] str;
-  }
-
-  // Assignment operator
-  String &operator=(const String &other)
-  {
-    if (this != &other)
-    {
-      delete[] str;
-      size = other.size;
-      str = new char[size + 1];
-      strcpy(str, other.str);
-    }
-    return *this;
-  }
-
-  // Getters
-  int get_size() const
-  {
-    return size;
-  }
-
-  const char *get_str() const
-  {
-    return str;
-  }
-
-  // Overload the + operator to concatenate two strings
-  String operator+(const String &other) const
-  {
-    int new_size = size + other.size;
-    char *new_str = new char[new_size + 1];
-    strcpy(new_str, str);
-    strcat(new_str, other.str);
-    String result(new_str);
-    delete[] new_str;
-    return result;
-  }
-};
